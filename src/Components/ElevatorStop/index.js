@@ -7,20 +7,19 @@ import Card from '@material-ui/core/Card';
 import Typography from "@material-ui/core/Typography";
 
 import {ArrowDropUp, ArrowDropDown} from "@material-ui/icons"
-import {Button} from "@material-ui/core";
+import {Button, IconButton} from "@material-ui/core";
 
 
-const ElevatorStop = ({classes, floorNumber, current, nextFloors}) => {
+const ElevatorStop = ({classes, floorNumber, current, nextFloors, onClick, direction, setDirection}) => {
 
     const nextFloorsGenerator = (floors) => (
         <div className={classes.nextStopIconContainer}>
             {floors.map((floor) => (
-                    <span className={classes.nextStopCircle}>
+                <span key={floor} className={classes.nextStopCircle}>
                     <Typography className={classes.nextStopTitle}>
                         {floor}
                     </Typography>
-                </span>
-                )
+                </span>)
             )}
         </div>
     )
@@ -28,16 +27,25 @@ const ElevatorStop = ({classes, floorNumber, current, nextFloors}) => {
     return (
         <div className={classes.root}>
             <div className={classes.iconContainer}>
-                <ArrowDropUp/>
-                <ArrowDropDown/>
+                <IconButton onClick={() => setDirection("up")}>
+                    <ArrowDropUp
+                        className={Classnames(classes.icon,
+                            current && direction === "up" ? classes.activeIcon : classes.normalIcon)}
+                    />
+                </IconButton>
+                <IconButton onClick={() => setDirection("down")}>
+                    <ArrowDropDown className={Classnames(classes.icon,
+                        current && direction === "down" ? classes.activeIcon : classes.normalIcon)}
+                    />
+                </IconButton>
             </div>
-            <Button className={classes.button}>
+            <Button className={classes.button} onClick={onClick}>
                 <Card className={Classnames(classes.stopBox, current ? classes.currentStop : classes.normalStop)}>
                     <div className={classes.cardContent}>
                         <Typography className={classes.title}>
                             {floorNumber}
                         </Typography>
-                        {nextFloors && current && nextFloorsGenerator(nextFloors.reverse())}
+                        {nextFloors && current && nextFloorsGenerator(nextFloors)}
                     </div>
                 </Card>
             </Button>

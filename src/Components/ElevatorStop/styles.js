@@ -5,7 +5,7 @@ const styles = {
     },
 
     button: {
-        margin: "20px",
+        margin: "20px 0",
         borderRadius: "20%",
         padding: "5px 0 5px 0"
     },
@@ -19,8 +19,8 @@ const styles = {
     },
 
     icon: {
-        height: "60px",
-        padding: "10px",
+        width: "30px",
+        height: "30px",
     },
 
     stopBox: {
@@ -42,6 +42,14 @@ const styles = {
         marginLeft: "40px",
         width: "40px",
         color: "#ffffff",
+    },
+
+    normalIcon: {
+        color: "#4d4d68",
+    },
+
+    activeIcon: {
+        color: "#13b38b",
     },
 
     normalStop: {

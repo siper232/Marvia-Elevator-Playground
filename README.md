@@ -1,12 +1,30 @@
-Marvia-Elevator-Playground
+#Marvia-Elevator-Playground
 
 An internship assignment for the company Marvia.
 
+##Task
+
+Build a simple web application in React that simulates a working elevator. The elevator should contain the following:
+
+ -   The elevator must be able to move between five floors
+ -   The elevator must contain buttons on the outside that prepare the elevator whether you would like to go up or down
+ -   The elevator must contain pressable buttons for all five floors
+ -   When pressing buttons when the elevator is moving, the elevator must be able to change its route. For example, when the elevator is on the fifth floor and you press the buttons 0, 1, and 3 in this order, the elevator must recognize that the most efficient order to stop is 3 -> 1 -> 0.
+
+##Constraints
+
+ -   No specific frameworks are required, however, it is recommended to use any tools/frameworks that help to separate the logic from the UI
+ -   No data storage or any back-end services are needed, all the logic can live on the client-side
+ -   The elevator should simulate a certain delay (X seconds) when moving between floors
+ -   No aesthetics are required, just basic functionality; clicks should trigger commands
+ -   Preferably use functional components
+ -   Preferably use typescript
+
+For the full assignment (including a picture) click on this link: [assignment link](https://www.getmarvia.com/careers/react-programming-assignment)
 
 
 
-
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
