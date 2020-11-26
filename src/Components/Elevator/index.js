@@ -3,6 +3,8 @@ import Styles from "./styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {debounce} from "lodash";
 
+import {customLoop, sortFloors} from "./Helpers"
+
 import ElevatorStop from "../ElevatorStop";
 
 const Elevator = ({classes, amountFloors}) => {
@@ -37,8 +39,7 @@ const Elevator = ({classes, amountFloors}) => {
         } else {
             // not proud of this, but because I use a reference and call function right after, I need to get
             // the full array right away and not with a small delay which the state will take to update
-            // let nextFloorsTemp = state.nextFloors.concat(floor);
-            let nextFloorsTemp = sortFloors(state.nextFloors.concat(floor));
+            let nextFloorsTemp = sortFloors(state.nextFloors.concat(floor), state);
 
             setNextFloors(nextFloorsTemp);
 
@@ -52,89 +53,10 @@ const Elevator = ({classes, amountFloors}) => {
         }
         const numberOfFloors = floors.length;
 
-        customLoop(floors, numberOfFloors, i);
-        i = 0;
+        customLoop(floors, numberOfFloors, 0, setState, state);
+
 
     }, 2000)).current;
-
-
-    let i = 0
-    const customLoop = (floors, length) => {
-        setTimeout(() => {
-            let tempCurrent = floors[0];
-            floors.shift();
-            setState({
-                ...state,
-                current: tempCurrent,
-                nextFloors: floors,
-            });
-            i++;
-            if (i < length) {
-                customLoop(floors, length);
-            }
-        }, 500);
-    }
-
-    const sortFloors = (nextFloors) => {
-        let tempArray = nextFloors;
-        let begin = [];
-        let end = [];
-        let found = false;
-
-        tempArray = [...new Set(tempArray)];
-        tempArray = tempArray.filter((item) => item !== state.current);
-
-        switch (state.direction) {
-            case "up":
-                if (state.current === 0) {
-                    tempArray = nextFloors;
-                    tempArray.sort();
-                    return tempArray;
-                } else {
-                    tempArray.sort();
-                    for (let i = 0; i < tempArray.length; i++) {
-                        if ((state.current - tempArray[i]) < 0) {
-                            begin = tempArray.slice(i);
-                            end = tempArray.slice(0, i);
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found) {
-                        return begin.concat(end.sort());
-                    } else {
-                        return tempArray.sort().reverse();
-                    }
-                }
-            case "down":
-                if (state.current === 5) {
-                    tempArray = nextFloors;
-                    tempArray.sort().reverse();
-                    return tempArray;
-                } else {
-                    tempArray.sort((a, b) => b-a);
-                    for (let i = 0; i < tempArray.length; i++) {
-                        if ((state.current - tempArray[i]) > 0) {
-                            begin = tempArray.slice(i);
-                            end = tempArray.slice(0, i);
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found) {
-                        return begin.concat(end.sort());
-                    } else {
-                        return tempArray.sort();
-                    }
-                }
-            default:
-                // should never come here because of the check on line 37
-                break;
-        }
-    }
-
-
-
 
 
     const stopGenerator = (amount) => {

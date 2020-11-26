@@ -78,7 +78,7 @@ const styles = {
         backgroundColor: "#fffa7a",
         borderRadius: "50%",
         display: "inline-block",
-        }
+    }
 }
 
 export default styles
