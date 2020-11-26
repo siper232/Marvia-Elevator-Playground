@@ -1,8 +1,8 @@
-#Marvia-Elevator-Playground
+# Marvia-Elevator-Playground
 
 An internship assignment for the company Marvia.
 
-##Task
+## Task
 
 Build a simple web application in React that simulates a working elevator. The elevator should contain the following:
 
@@ -11,7 +11,7 @@ Build a simple web application in React that simulates a working elevator. The e
  -   The elevator must contain pressable buttons for all five floors
  -   When pressing buttons when the elevator is moving, the elevator must be able to change its route. For example, when the elevator is on the fifth floor and you press the buttons 0, 1, and 3 in this order, the elevator must recognize that the most efficient order to stop is 3 -> 1 -> 0.
 
-##Constraints
+## Constraints
 
  -   No specific frameworks are required, however, it is recommended to use any tools/frameworks that help to separate the logic from the UI
  -   No data storage or any back-end services are needed, all the logic can live on the client-side
